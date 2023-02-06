@@ -1,57 +1,55 @@
 package com.dcx.Luogu.moniyugaojindu;
 
+import java.io.IOException;
 import java.util.Scanner;
 
-import com.sun.imageio.plugins.common.I18N;
-
-import sun.security.util.math.ImmutableIntegerModuloP;
-
 public class P1042 {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		//11分制结果数组 2*100
+		int res1[][] = new int[2][5000];
+		//21分制结果数组 2*100
+		int res2[][] = new int[2][5000];
+		//记录11分制结果数量
+		int r1 = 0;
+		//21分制结果数量
+		int r2 = 0;
 		Scanner scanner = new Scanner(System.in);
-		String str = "";
-		while(true) {
-			String t = scanner.nextLine();
-			str += t;
-			if(t.indexOf("E") != -1) {
-				break;
+		//读取并统计
+		while (true) {
+			//读取数据
+			char ch = (char)System.in.read();//读取单个字符；
+			if(ch == 'E') break;
+			if(ch == 'W') {
+				res1[0][r1]++;
+				res2[0][r2]++;
+			}else if(ch == 'L'){
+				res1[1][r1]++;
+				res2[1][r2]++;
+			}else {
+				continue;
+			}
+			if((res1[0][r1] >= 11 || res1[1][r1] >= 11) && Math.abs(res1[0][r1] - res1[1][r1]) >= 2) {
+				r1++;
+			}
+			if((res2[0][r2] >= 21 || res2[1][r2] >= 21) && Math.abs(res2[0][r2] - res2[1][r2]) >= 2) {
+				r2++;
 			}
 		}
-		int cent1[][] = new int [2][3];
-		int cent2[][] = new int [2][3];
 		scanner.close();
-		int w = 0;
-		int l = 0;
-		int i = 1;
-		int j = 1;
-		int g1 = 0;
-		int g2 = 0;
-		int len = str.length();
-		while (str.charAt(i) != 'E') {
-			char t = str.charAt(i++);
-			j++;
-			if(t == 'W') w++;
-			else l++;
-			if(i % 11 == 0 || i == len) { 
-				cent1[i][0] = w;
-				cent1[i][1] = l;
-				w = 0;
-				l = 0;
-				g1++;
-			}
-			if(j % 21 == 0 || i == len) { 
-				cent2[0][i] = w;
-				cent2[1][i] = l;
-				w = 0;
-				l = 0;
-				g2++;
-			}
+		//输出
+		for(int i = 0; i <= r1; i++) {
+			System.out.println(res1[0][i] + ":" + res1[1][i]);
 		}
-		for(int i1 = 0; i1 < g1; i1++) {
-			System.out.println(cent1[0][i1] + ":" + cent1[1][i1]);
-		}
-		for(int i2 = 0; i2 < g2; i2++) {
-			System.out.println(cent2[0][i2] + ":" + cent2[1][i2]);
+		System.out.println();
+		for(int i = 0; i <= r2; i++) {
+			System.out.println(res2[0][i] + ":" + res2[1][i]);
 		}
 	}
 }
+
+/*
+1.一个数组存11分制结果
+2.一个数组存21分制结果
+3.读取数据时进行统计
+4.输出
+*/
