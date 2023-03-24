@@ -16,7 +16,7 @@ public class P1873 {
 			st.nextToken();
 			tree[i] = (int)st.nval;
 		}
-		//二分
+		//二分 对mid进行判断，查看是否为不满足条件的左区间界限。
 		int L = 1; int R = 100000000;
 		while(L != R) {
 			int mid = (L + R)/2;
@@ -25,6 +25,7 @@ public class P1873 {
 			if(check(tree, N, M, mid)) R = mid;
 			else L= mid + 1;
 		}
+		//L为不满足条件的左边界，减一为满足条件的右边界，即答案。
 		System.out.println(L-1);
 
 	}
@@ -36,6 +37,7 @@ public class P1873 {
 //			System.out.println("mid " + mid);
 			if(tree[i] >= mid) {
 				sum += tree[i] - mid;
+				//查找大于m的最大数，则满足的最大m为边界-1.
 				if(sum >= M) return false;
 			}
 		}

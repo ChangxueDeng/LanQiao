@@ -1,16 +1,20 @@
 package com.dcx.Luogu.paixu;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StreamTokenizer;
 
-import com.dcx.tool.Reader;
 //¿ìËÙÅÅÐòÄ£°å
 public class P1177 {
 	static int num[] = new int[100001];
 	static int n;
 	public static void main(String[] args) throws IOException{
-		Reader.init(System.in);
-		n = Reader.nextInt();
+		StreamTokenizer in = new StreamTokenizer(new BufferedReader(new InputStreamReader(System.in)));
+		in.nextToken();
+		n = (int)in.nval;
 		for(int i = 0; i < n ;i++) {
-			num[i] = Reader.nextInt();
+			in.nextToken();
+			num[i] = (int)in.nval;
 		}
 		sort(0, n-1);
 		for(int i = 0; i < n; i++) {
