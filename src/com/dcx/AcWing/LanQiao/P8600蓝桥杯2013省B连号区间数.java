@@ -4,10 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StreamTokenizer;
-import java.util.*;
 
 public class P8600蓝桥杯2013省B连号区间数 {
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws IOException {
 		StreamTokenizer st = new StreamTokenizer(new BufferedReader(new InputStreamReader(System.in)));
 		st.nextToken();
 		int N = (int)st.nval;
